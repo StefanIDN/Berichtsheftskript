@@ -12,7 +12,7 @@ weekday = heute.strftime("%u") #Der Wochentag als Zahl zum Vergleichen
 
 def Generator(heute1):
     KW = heute1.isocalendar()[1] #Für die Kalenderwoche 
-    Abteilung = int(input("Welche Abteilung?\n 1 = Infra\n 2 = Schule\n 3 = ELIT\n"))
+    Abteilung = int(input("Welche Abteilung?\n 1 = Infra\n 2 = Schule\n 3 = ELIT\n")) #Abfrage welche Abteilung
     if Abteilung == 1:
         abteilungname = "Infrastruktur"
     elif Abteilung == 2:
