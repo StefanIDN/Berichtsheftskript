@@ -17,6 +17,8 @@ def Generator(heute1):
         abteilungname = "Infrastruktur"
     elif Abteilung == 2:
         abteilungname = "Schule"
+    elif Abteilung == 3:
+        abteilungname = "Urlaub"
     else:
         abteilungname = "ELIT"
 
