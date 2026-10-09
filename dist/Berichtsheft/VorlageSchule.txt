@@ -1,0 +1,24 @@
+Mo.
+> SP (BaSt)
+> RE (BaJa)
+> LF09 (DoCh)
+> RE (BaJa)	
+Di.
+--
+> LF08 (ScRa)
+> DE (LeKr)
+> WSO (BaSt)	
+Mi.
+--
+> LF09 (HaUw)
+> LF08 (HeTh, ScRa)
+> LF09 (DeCh)
+Do.
+--
+> LF09 (DoCh)
+Fr.
+--
+> LF09 (DeCh, HaUw)
+> LF08 (ScRa)
+> LF09 (DoCh) 
+End

@@ -5,6 +5,7 @@ import os
 import customtkinter as ctk
 
 
+
 try:
     locale.setlocale(locale.LC_TIME, 'de_DE.UTF-8') #Setzt die Wochentage auf Deutsch
 except locale.Error:
