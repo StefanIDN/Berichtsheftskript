@@ -14,11 +14,26 @@ except locale.Error:
 heute = datetime.datetime.now() #Das heutige Datum wird ausgelesen
 weekday = heute.strftime("%u") #Der Wochentag als Zahl zum Vergleichen
 
-
-def Generator(heute1,Abteilung):
+ 
+def Generator(Abteilung,KW):
     f=open("output.txt","w")# öffne neue txt und w = write (überschreiben)
-    KW = heute1.isocalendar()[1] #Für die Kalenderwoche 
     
+    #k = int(weekday)-1 #in K kommt die Zahl vom Wochentag minus 1
+    #heute1 = heute - datetime.timedelta(days=k)#heutige Datum minus die anzahl der T'age von k
+    heute1 = Montag
+    KW1 = Montag.isocalendar()[1]
+    
+    if KW>KW1:
+        x=KW-KW1
+        y=x*7
+        heute1 = heute1 + datetime.timedelta(days=y)
+    if KW1>KW:
+        x=KW1-KW
+        y=x*(7)
+        heute1 = heute1 - datetime.timedelta(days=y)
+
+
+
     if Abteilung == 1:
         abteilungname = "Infrastruktur"
     elif Abteilung == 2:
@@ -127,7 +142,7 @@ ctk.set_default_color_theme("blue")
 # Hauptfenster
 Berichtsheft = ctk.CTk()
 Berichtsheft.title("Berichtsheft Generator")
-Berichtsheft.geometry("420x600")
+Berichtsheft.geometry("420x700")
 Berichtsheft.resizable(False, False)
 
 
@@ -148,8 +163,44 @@ Untertitel = ctk.CTkLabel(
 Untertitel.pack(pady=(0, 25))
 
 
+def Erstellen():
+    
+    KW = Montag.isocalendar()[1]
+    
+    Inhalt2=e1.get()
+    Inhalt2=Inhalt2.strip()
+    Zahlen=Inhalt2.isdigit()
+    if Inhalt2:
+            if Zahlen:
+                KW=int(Inhalt2)  
+            else:
+                Status.configure(
+                text="⚠ Bitte nur Zahlen eingeben."
+            )
+                return
+    
+    Abteilung = v.get()
+
+    if Abteilung == 0:
+        Status.configure(
+            text="⚠ Bitte zuerst eine Abteilung auswählen."
+        )
+        return
+
+    Generator(Abteilung,KW)
+
+    Status.configure(
+        text="✓ Berichtsheft erfolgreich erstellt."
+    )
+
+    
+
+
 # Informationen zur aktuellen Woche
-KW = Montag.isocalendar()[1]
+KW = Montag.isocalendar()[1] #Für die Kalenderwoche  Index 1 für die KW weil Output= Year, KW, day
+
+
+
 Freitag = Montag + datetime.timedelta(days=4)
 
 WochenInfo = ctk.CTkFrame(Berichtsheft)
@@ -168,6 +219,23 @@ DatumLabel = ctk.CTkLabel(
     font=("Arial", 14)
 )
 DatumLabel.pack(pady=(0, 15))
+
+Kalenderwoche = ctk.CTkLabel(
+    Berichtsheft,
+    text="Kalenderwoche",
+    font=("Arial", 14, "bold")
+    )
+Kalenderwoche.pack(pady=(0,30))
+
+e1 = ctk.CTkEntry(Berichtsheft)
+e1.pack(pady=(0,30))
+
+
+
+
+button = ctk.CTkButton(Berichtsheft, text="Bestätigen",command=Erstellen)
+button.pack(pady=(0,31))
+
 
 
 # Abteilung
@@ -228,23 +296,6 @@ Status.pack(pady=(15, 5))
 
 
 # Erstellen
-def Erstellen():
-
-    Abteilung = v.get()
-
-    if Abteilung == 0:
-        Status.configure(
-            text="⚠ Bitte zuerst eine Abteilung auswählen."
-        )
-        return
-
-    Generator(Montag, Abteilung)
-
-    Status.configure(
-        text="✓ Berichtsheft erfolgreich erstellt."
-    )
-
-    os.startfile("output.txt")
 
 
 Button = ctk.CTkButton(
